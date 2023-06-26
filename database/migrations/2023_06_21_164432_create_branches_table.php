@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->integer('vendor_id')->nullable();
+            $table->unsignedBigInteger('vendor_id');
             $table->integer('country_id');
             $table->string('branch_code', 30)->unique();
             $table->string('name', 250);
@@ -44,7 +44,7 @@ return new class extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
-            $table->foreign('vendor_id')->references('id')->on('users');
+            $table->foreign('vendor_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
